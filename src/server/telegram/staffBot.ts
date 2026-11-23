@@ -162,9 +162,57 @@ export async function handleStaffBotMessage(msg: any) {
   }
 
   // Xodimni bazadan qidirish
-  const staffUser = await prisma.user.findUnique({
+  let staffUser = await prisma.user.findUnique({
     where: { telegramId: fromId },
   });
+
+  const expectedOwnerUsername = (process.env.OWNER_TELEGRAM_USERNAME || 'fayzbek1331').toLowerCase();
+
+  // Agar xodim topilmasa, lekin yozuvchi username OWNER_TELEGRAM_USERNAME bo'lsa (Ownerning birinchi kirishi)
+  if (!staffUser && fromUsername && fromUsername.toLowerCase() === expectedOwnerUsername) {
+    const owner = await prisma.user.findFirst({
+      where: { role: 'OWNER' },
+    });
+    if (owner) {
+      staffUser = await prisma.user.update({
+        where: { id: owner.id },
+        data: {
+          telegramId: fromId,
+          telegramUsername: fromUsername,
+        },
+      });
+
+      await prisma.auditLog.create({
+        data: {
+          actorId: owner.id,
+          action: 'OWNER_TELEGRAM_BIND',
+          meta: {
+            telegramId: fromId.toString(),
+            username: fromUsername,
+            boundAt: new Date().toISOString(),
+            method: 'DIRECT_START',
+          },
+        },
+      });
+
+      await client.sendMessage(
+        chatId,
+        `🎉 <b>Tabriklaymiz, hurmatli Loyiha Egasi (@${escapeHtml(fromUsername)})!</b>\n\n` +
+        `Sizning Telegram hisobingiz Tez-Taom tizimiga <b>OWNER</b> sifatida muvaffaqiyatli bog‘landi.\n\n` +
+        `<b>Guruhni sozlash uchun:</b>\n` +
+        `1. Meni restoran xodimlari guruhiga qo‘shing.\n` +
+        `2. Guruh ichida <code>/setgroup</code> buyrug‘ini yuboring.\n\n` +
+        `<b>Boshqaruv buyruqlari:</b>\n` +
+        `• /orders — Faol buyurtmalar\n` +
+        `• /today — Bugungi tushum va statistika\n` +
+        `• /open — Buyurtma qabul qilishni yoqish\n` +
+        `• /close — Buyurtma qabul qilishni to‘xtatish\n` +
+        `• /chatid — Ushbu chat ID sini ko‘rish\n` +
+        `• /help — Yordam`
+      );
+      return;
+    }
+  }
 
   // Guruhdagi /chatid buyrug'i
   if (text === '/chatid') {
@@ -195,8 +243,29 @@ export async function handleStaffBotMessage(msg: any) {
   // Xodim bo'lmagan foydalanuvchi xabari
   if (!staffUser || staffUser.role === 'CUSTOMER') {
     if (isPrivate) {
-      await client.sendMessage(chatId, `⛔ <b>Bu bot faqat Tez-Taom xodimlari uchun.</b>`);
+      await client.sendMessage(
+        chatId,
+        `⛔ <b>Bu bot faqat Tez-Taom xodimlari uchun.</b>\n\nAgar siz loyiha egasi bo‘lsangiz, Telegram usernameingiz @${escapeHtml(expectedOwnerUsername)} ekanligini tekshiring.`
+      );
     }
+    return;
+  }
+
+  // /start buyrug'i (Bog'langan xodimlar uchun)
+  if (text === '/start') {
+    await client.sendMessage(
+      chatId,
+      `👋 <b>Assalomu alaykum, ${escapeHtml(staffUser.name)}!</b>\n\n` +
+      `Siz Tez-Taom xodimlar tizimida: <b>${staffUser.role}</b> roliga egasiz.\n\n` +
+      `<b>Mavjud buyruqlar:</b>\n` +
+      `• /orders — Faol buyurtmalar ro‘yxati\n` +
+      `• /today — Bugungi statistika va tushum\n` +
+      (staffUser.role === 'OWNER' || staffUser.role === 'ADMIN'
+        ? `• /open — Buyurtma qabul qilishni yoqish\n• /close — To‘xtatish\n• /setgroup — Xodimlar guruhini sozlash\n`
+        : '') +
+      `• /chatid — Ushbu chat ID sini ko‘rish\n` +
+      `• /help — Yordam`
+    );
     return;
   }
 

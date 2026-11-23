@@ -14,8 +14,8 @@ export class TelegramClient {
   private baseUrl: string;
 
   constructor(token: string) {
-    this.token = token;
-    this.baseUrl = `https://api.telegram.org/bot${token}`;
+    this.token = (token || '').replace(/^["']|["']$/g, '').trim();
+    this.baseUrl = `https://api.telegram.org/bot${this.token}`;
   }
 
   public async callApi<T = any>(
