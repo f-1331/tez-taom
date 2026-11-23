@@ -1,0 +1,102 @@
+{
+  "common": {
+    "appName": "Tez-Taom",
+    "tagline": "Fast, hot, delicious",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "empty": "No items found",
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "back": "Back",
+    "currency": "UZS"
+  },
+  "header": {
+    "menu": "Menu",
+    "orders": "My Orders",
+    "about": "About Us",
+    "language": "Language",
+    "cart": "Cart"
+  },
+  "hero": {
+    "title": "Hungry? At your door in 25 minutes.",
+    "subtitle": "Hot burgers, juicy lavash rolls, and delicious snacks delivered across Tashkent.",
+    "cta": "Order Now"
+  },
+  "menu": {
+    "allCategories": "All items",
+    "addToCart": "Add",
+    "added": "Added",
+    "outOfStock": "Out of stock",
+    "allergens": "Allergens",
+    "modifiersTitle": "Customize your item",
+    "customize": "Customize",
+    "required": "Required",
+    "optional": "Optional",
+    "chooseOptions": "Choose options",
+    "popular": "Popular",
+    "new": "New"
+  },
+  "cart": {
+    "title": "Order Receipt",
+    "emptyTitle": "Your cart is empty",
+    "emptySubtitle": "Select your favorite dishes from our menu",
+    "subtotal": "Items subtotal",
+    "deliveryFee": "Delivery fee",
+    "freeDeliveryNotice": "Free delivery on orders over 100,000 UZS!",
+    "discount": "Discount",
+    "total": "Total due",
+    "checkoutBtn": "Proceed to Checkout",
+    "clearCart": "Clear",
+    "itemsCount": "{count, plural, one {# item} other {# items}}"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "deliveryType": "Delivery method",
+    "delivery": "Delivery",
+    "pickup": "Pickup",
+    "name": "Your name",
+    "phone": "Phone number",
+    "address": "Delivery address",
+    "addressPlaceholder": "Street, building, apartment / office",
+    "comment": "Order notes",
+    "commentPlaceholder": "E.g.: door code or landmark instructions",
+    "scheduledTime": "Delivery time",
+    "asSoonAsPossible": "As soon as possible (25-35 min)",
+    "selectTime": "Select time",
+    "paymentMethod": "Payment method",
+    "cash": "Cash",
+    "cardOnDelivery": "Card on delivery",
+    "online": "Online payment",
+    "placeOrder": "Place Order",
+    "placing": "Submitting order...",
+    "orderSuccess": "Your order has been received!",
+    "backToMenu": "Back to menu",
+    "minOrderNotice": "No minimum order requirement",
+    "promoPlaceholder": "Promo code",
+    "applyPromo": "Apply"
+  },
+  "orderStatus": {
+    "title": "Order Status",
+    "orderNumber": "Order #{number}",
+    "statusNew": "New order received",
+    "statusConfirmed": "Order confirmed",
+    "statusPreparing": "Cooking in kitchen",
+    "statusReady": "Order is ready",
+    "statusOnTheWay": "Courier on the way",
+    "statusDelivered": "Delivered",
+    "statusPickedUp": "Picked up by customer",
+    "statusCanceled": "Order canceled",
+    "etaText": "Estimated time: {minutes} min",
+    "courierInfo": "Courier: {name} ({phone})",
+    "timelineTitle": "Order Progress",
+    "liveUpdates": "Live status updates"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "workingHours": "Daily from 09:00 to 23:00",
+    "phone": "Contact: +998 71 200 00 00",
+    "address": "Tashkent city, Amir Temur avenue, 1"
+  }
+}

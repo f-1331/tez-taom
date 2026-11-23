@@ -1,0 +1,102 @@
+{
+  "common": {
+    "appName": "Tez-Taom",
+    "tagline": "Tez, issiq, mazali",
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi",
+    "empty": "Ma'lumot topilmadi",
+    "retry": "Qayta urinish",
+    "cancel": "Bekor qilish",
+    "save": "Saqlash",
+    "close": "Yopish",
+    "back": "Orqaga",
+    "currency": "so‘m"
+  },
+  "header": {
+    "menu": "Menyu",
+    "orders": "Buyurtmalarim",
+    "about": "Biz haqimizda",
+    "language": "Til",
+    "cart": "Savat"
+  },
+  "hero": {
+    "title": "Och qoldingmi? 25 daqiqada eshigingda.",
+    "subtitle": "Toshkent bo‘ylab qaynoq burgerlar, mazali lavashlar va xushta'm gazaklar.",
+    "cta": "Hozir buyurtma berish"
+  },
+  "menu": {
+    "allCategories": "Barcha taomlar",
+    "addToCart": "Qo‘shish",
+    "added": "Qo‘shildi",
+    "outOfStock": "Mavjud emas",
+    "allergens": "Allergenlar",
+    "modifiersTitle": "Taomni sozlash",
+    "customize": "Moslashtirish",
+    "required": "Majburiy",
+    "optional": "Ixtiyoriy",
+    "chooseOptions": "Variantlarni tanlang",
+    "popular": "Mashhur",
+    "new": "Yangi"
+  },
+  "cart": {
+    "title": "Buyurtma cheki",
+    "emptyTitle": "Savatchangiz bo‘sh",
+    "emptySubtitle": "Menyudan o‘zingiz yoqtirgan taomlarni tanlang",
+    "subtotal": "Taomlar summasi",
+    "deliveryFee": "Yetkazib berish",
+    "freeDeliveryNotice": "100 000 so‘mdan ortiq buyurtmalarga bepul yetkazish!",
+    "discount": "Chegirma",
+    "total": "Jami to‘lov",
+    "checkoutBtn": "Buyurtmani rasmiylashtirish",
+    "clearCart": "Tozalash",
+    "itemsCount": "{count, plural, one {# ta taom} other {# ta taom}}"
+  },
+  "checkout": {
+    "title": "Rasmiylashtirish",
+    "deliveryType": "Yetkazish usuli",
+    "delivery": "Yetkazib berish",
+    "pickup": "Olib ketish",
+    "name": "Ismingiz",
+    "phone": "Telefon raqamingiz",
+    "address": "Yetkazish manzili",
+    "addressPlaceholder": "Ko‘cha, uy, xonadon raqami",
+    "comment": "Buyurtmaga izoh",
+    "commentPlaceholder": "Masalan: domofon kodi yoki yetkazish uchun eslatma",
+    "scheduledTime": "Yetkazish vaqti",
+    "asSoonAsPossible": "Iloji boricha tezroq (25-35 daqiqa)",
+    "selectTime": "Vaqtni tanlash",
+    "paymentMethod": "To‘lov usuli",
+    "cash": "Naqd pul",
+    "cardOnDelivery": "Karta orqali (kuryerga)",
+    "online": "Onlayn to‘lov",
+    "placeOrder": "Buyurtma berish",
+    "placing": "Buyurtma qabul qilinmoqda...",
+    "orderSuccess": "Buyurtmangiz qabul qilindi!",
+    "backToMenu": "Menyuga qaytish",
+    "minOrderNotice": "Minimal buyurtma summasi mavjud emas",
+    "promoPlaceholder": "Promo-kod",
+    "applyPromo": "Qo‘llash"
+  },
+  "orderStatus": {
+    "title": "Buyurtma holati",
+    "orderNumber": "Buyurtma #{number}",
+    "statusNew": "Yangi buyurtma qabul qilindi",
+    "statusConfirmed": "Buyurtma tasdiqlandi",
+    "statusPreparing": "Oshxonada tayyorlanmoqda",
+    "statusReady": "Buyurtma tayyor",
+    "statusOnTheWay": "Kuryer yo‘lda",
+    "statusDelivered": "Yetkazib berildi",
+    "statusPickedUp": "Mijoz olib ketdi",
+    "statusCanceled": "Buyurtma bekor qilindi",
+    "etaText": "Taxminiy vaqt: {minutes} daqiqa",
+    "courierInfo": "Kuryer: {name} ({phone})",
+    "timelineTitle": "Buyurtma jarayoni",
+    "liveUpdates": "Real-vaqt rejimida yangilanmoqda"
+  },
+  "footer": {
+    "rights": "Barcha huquqlar himoyalangan.",
+    "workingHours": "Har kuni 09:00 dan 23:00 gacha",
+    "phone": "Bog‘lanish: +998 71 200 00 00",
+    "address": "Toshkent shahri, Amir Temur shoh ko‘chasi, 1-uy"
+  }
+}

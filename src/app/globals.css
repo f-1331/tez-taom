@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-unbounded: 'Unbounded', sans-serif;
+  --font-onest: 'Onest', sans-serif;
+}
+
+body {
+  font-family: var(--font-onest);
+  color: #231815;
+  background-color: #F5F2EF;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Zigzag receipt border effect */
+.receipt-zigzag {
+  position: relative;
+}
+
+.receipt-zigzag::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 10px;
+  background: radial-gradient(circle, transparent, transparent 50%, #FAF8F5 50%, #FAF8F5 100%);
+  background-size: 16px 20px;
+}
+
+/* Dotted divider */
+.receipt-divider {
+  border-bottom: 2px dashed #E2DDD7;
+}
+
+/* Accessible focus outlines */
+*:focus-visible {
+  outline: 2px solid #C92A1C;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,347 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  OPERATOR
+  KITCHEN
+  COURIER
+  CUSTOMER
+}
+
+enum OrderType {
+  DELIVERY
+  PICKUP
+  DINE_IN
+}
+
+enum PaymentMethod {
+  CASH
+  CARD_ON_DELIVERY
+  PAYME
+  CLICK
+  UZUM
+}
+
+enum PaymentStatus {
+  UNPAID
+  PENDING
+  PAID
+  REFUNDED
+  FAILED
+}
+
+enum OrderStatus {
+  NEW
+  CONFIRMED
+  PREPARING
+  READY
+  ON_THE_WAY
+  DELIVERED
+  PICKED_UP
+  CANCELED
+}
+
+enum PromoType {
+  PERCENT
+  FIXED
+  FREE_DELIVERY
+}
+
+enum NotificationStatus {
+  PENDING
+  PROCESSING
+  SENT
+  FAILED
+}
+
+enum TelegramLinkTokenKind {
+  OWNER_BIND
+  STAFF_INVITE
+  ORDER_TRACK
+}
+
+model User {
+  id               String       @id @default(cuid())
+  role             Role         @default(CUSTOMER)
+  name             String
+  phone            String
+  email            String?      @unique
+  passwordHash     String?
+  telegramId       BigInt?      @unique
+  telegramUsername String?
+  locale           String       @default("uz")
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  orders           Order[]      @relation("CustomerOrders")
+  courierOrders    Order[]      @relation("CourierOrders")
+  addresses        Address[]
+  events           OrderEvent[]
+}
+
+model Branch {
+  id        String         @id @default(cuid())
+  name      Json           // LocalizedText: { uz, "uz-Cyrl", ru, en }
+  address   Json           // LocalizedText
+  lat       Float
+  lng       Float
+  phone     String
+  hours     Json           // { open: "09:00", close: "23:00" }
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  zones     DeliveryZone[]
+  orders    Order[]
+}
+
+model DeliveryZone {
+  id         String   @id @default(cuid())
+  branchId   String
+  branch     Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  name       String   // e.g. "0-3 km"
+  polygon    Json?    // GeoJSON polygon
+  fee        Int      // In UZS
+  minOrder   Int      @default(0)
+  etaMinutes Int      @default(30)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  orders     Order[]
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      Json       // LocalizedText: { uz, "uz-Cyrl", ru, en }
+  slug      String     @unique
+  sort      Int        @default(0)
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  items     MenuItem[]
+}
+
+model MenuItem {
+  id          String          @id @default(cuid())
+  categoryId  String
+  category    Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name        Json            // LocalizedText: { uz, "uz-Cyrl", ru, en }
+  description Json            // LocalizedText
+  price       Int             // In UZS
+  imageUrl    String?
+  emoji       String?
+  tags        String[]        @default([])
+  allergens   String[]        @default([])
+  isActive    Boolean         @default(true)
+  sort        Int             @default(0)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  modifiers   ModifierGroup[]
+  orderItems  OrderItem[]
+}
+
+model ModifierGroup {
+  id         String           @id @default(cuid())
+  menuItemId String
+  menuItem   MenuItem         @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+  name       Json             // LocalizedText
+  required   Boolean          @default(false)
+  min        Int              @default(0)
+  max        Int              @default(1)
+  sort       Int              @default(0)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  options    ModifierOption[]
+}
+
+model ModifierOption {
+  id         String        @id @default(cuid())
+  groupId    String
+  group      ModifierGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  name       Json          // LocalizedText
+  priceDelta Int           @default(0) // In UZS
+  isActive   Boolean       @default(true)
+  sort       Int           @default(0)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+}
+
+model Promo {
+  id         String    @id @default(cuid())
+  code       String    @unique
+  type       PromoType
+  value      Int       // percentage (e.g. 10 for 10%) or fixed sum (e.g. 15000)
+  minOrder   Int       @default(0)
+  startsAt   DateTime  @default(now())
+  endsAt     DateTime
+  usageLimit Int?
+  usedCount  Int       @default(0)
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Address {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label     String   // e.g. "Uy", "Ish"
+  text      String
+  lat       Float
+  lng       Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id              String        @id @default(cuid())
+  number          Int           // Daily sequence number
+  userId          String?
+  user            User?         @relation("CustomerOrders", fields: [userId], references: [id], onDelete: SetNull)
+  branchId        String
+  branch          Branch        @relation(fields: [branchId], references: [id], onDelete: Restrict)
+  type            OrderType     @default(DELIVERY)
+  scheduledFor    DateTime?
+  customerName    String
+  phone           String
+  locale          String        @default("uz")
+  addressText     String?
+  lat             Float?
+  lng             Float?
+  zoneId          String?
+  zone            DeliveryZone? @relation(fields: [zoneId], references: [id], onDelete: SetNull)
+  comment         String?
+  paymentMethod   PaymentMethod @default(CASH)
+  paymentStatus   PaymentStatus @default(UNPAID)
+  status          OrderStatus   @default(NEW)
+  cancelReason    String?
+  courierId       String?
+  courier         User?         @relation("CourierOrders", fields: [courierId], references: [id], onDelete: SetNull)
+  subtotal        Int           // In UZS
+  discount        Int           @default(0)
+  deliveryFee     Int           @default(0)
+  total           Int           // In UZS
+  promoCode       String?
+  idempotencyKey  String        @unique
+  telegramChatId  String?       // Customer Telegram chat ID for tracking
+  staffMessageId  Int?          // Message ID in staff group for editing
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  items           OrderItem[]
+  events          OrderEvent[]
+  payments        Payment[]
+  review          Review?
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([branchId])
+}
+
+model OrderItem {
+  id             String    @id @default(cuid())
+  orderId        String
+  order          Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId     String
+  menuItem       MenuItem  @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
+  nameSnapshot   Json      // LocalizedText snapshot at purchase time
+  priceSnapshot  Int       // Base price at purchase time
+  qty            Int       @default(1)
+  note           String?
+  optionsSnapshot Json     // Selected options snapshot: [{ optionId, nameSnapshot, priceDelta }]
+}
+
+model OrderEvent {
+  id        String       @id @default(cuid())
+  orderId   String
+  order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  type      String       // STATUS_CHANGE, PAYMENT_UPDATE, NOTE_ADDED, etc.
+  from      OrderStatus?
+  to        OrderStatus?
+  actorId   String?
+  actor     User?        @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  meta      Json?
+  createdAt DateTime     @default(now())
+
+  @@index([orderId])
+}
+
+model Payment {
+  id           String        @id @default(cuid())
+  orderId      String
+  order        Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  provider     PaymentMethod
+  providerTxId String?
+  amount       Int           // In UZS
+  status       PaymentStatus @default(PENDING)
+  raw          Json?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([orderId])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  orderId   String   @unique
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  rating    Int      // 1 to 5
+  comment   String?
+  createdAt DateTime @default(now())
+}
+
+model NotificationJob {
+  id        String             @id @default(cuid())
+  channel   String             // TELEGRAM, SMS, PUSH
+  payload   Json
+  status    NotificationStatus @default(PENDING)
+  attempts  Int                @default(0)
+  runAt     DateTime           @default(now())
+  error     String?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  @@index([status, runAt])
+}
+
+model TelegramLinkToken {
+  id        String                @id @default(cuid())
+  kind      TelegramLinkTokenKind
+  tokenHash String                @unique
+  userId    String?
+  role      Role?
+  orderId   String?
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime              @default(now())
+
+  @@index([kind, expiresAt])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  action    String
+  meta      Json
+  createdAt DateTime @default(now())
+
+  @@index([action, createdAt])
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}

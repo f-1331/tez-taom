@@ -1,0 +1,102 @@
+{
+  "common": {
+    "appName": "Тез-Таом",
+    "tagline": "Быстро, горячо, вкусно",
+    "loading": "Загрузка...",
+    "error": "Произошла ошибка",
+    "empty": "Ничего не найдено",
+    "retry": "Повторить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "close": "Закрыть",
+    "back": "Назад",
+    "currency": "сум"
+  },
+  "header": {
+    "menu": "Меню",
+    "orders": "Мои заказы",
+    "about": "О нас",
+    "language": "Язык",
+    "cart": "Корзина"
+  },
+  "hero": {
+    "title": "Проголодались? Через 25 минут у вашей двери.",
+    "subtitle": "Горячие бургеры, сочный лаваш и аппетитные закуски с доставкой по Ташкенту.",
+    "cta": "Заказать сейчас"
+  },
+  "menu": {
+    "allCategories": "Все блюда",
+    "addToCart": "Добавить",
+    "added": "Добавлено",
+    "outOfStock": "Нет в наличии",
+    "allergens": "Аллергены",
+    "modifiersTitle": "Настройка блюда",
+    "customize": "Настроить",
+    "required": "Обязательно",
+    "optional": "По желанию",
+    "chooseOptions": "Выберите параметры",
+    "popular": "Хит",
+    "new": "Новинка"
+  },
+  "cart": {
+    "title": "Чек заказа",
+    "emptyTitle": "Ваша корзина пуста",
+    "emptySubtitle": "Выберите любимые блюда из нашего меню",
+    "subtotal": "Сумма блюд",
+    "deliveryFee": "Доставка",
+    "freeDeliveryNotice": "Бесплатная доставка при заказе от 100 000 сум!",
+    "discount": "Скидка",
+    "total": "Итого к оплате",
+    "checkoutBtn": "Оформить заказ",
+    "clearCart": "Очистить",
+    "itemsCount": "{count, plural, one {# блюдо} few {# блюда} many {# блюд} other {# блюда}}"
+  },
+  "checkout": {
+    "title": "Оформление заказа",
+    "deliveryType": "Способ получения",
+    "delivery": "Доставка",
+    "pickup": "Самовывоз",
+    "name": "Ваше имя",
+    "phone": "Номер телефона",
+    "address": "Адрес доставки",
+    "addressPlaceholder": "Улица, дом, квартира / офис",
+    "comment": "Комментарий к заказу",
+    "commentPlaceholder": "Например: код домофона или ориентир",
+    "scheduledTime": "Время получения",
+    "asSoonAsPossible": "Как можно скорее (25-35 мин)",
+    "selectTime": "Выбрать время",
+    "paymentMethod": "Способ оплаты",
+    "cash": "Наличными",
+    "cardOnDelivery": "Картой курьеру",
+    "online": "Онлайн оплата",
+    "placeOrder": "Подтвердить заказ",
+    "placing": "Оформление заказа...",
+    "orderSuccess": "Ваш заказ успешно принят!",
+    "backToMenu": "Вернуться в меню",
+    "minOrderNotice": "Минимальной суммы заказа нет",
+    "promoPlaceholder": "Промокод",
+    "applyPromo": "Применить"
+  },
+  "orderStatus": {
+    "title": "Статус заказа",
+    "orderNumber": "Заказ #{number}",
+    "statusNew": "Новый заказ принят",
+    "statusConfirmed": "Заказ подтвержден",
+    "statusPreparing": "Готовится на кухне",
+    "statusReady": "Заказ готов",
+    "statusOnTheWay": "Курьер в пути",
+    "statusDelivered": "Заказ доставлен",
+    "statusPickedUp": "Заказ получен клиентом",
+    "statusCanceled": "Заказ отменен",
+    "etaText": "Примерное время: {minutes} мин",
+    "courierInfo": "Курьер: {name} ({phone})",
+    "timelineTitle": "Прогресс заказа",
+    "liveUpdates": "Обновляется в реальном времени"
+  },
+  "footer": {
+    "rights": "Все права защищены.",
+    "workingHours": "Ежедневно с 09:00 до 23:00",
+    "phone": "Телефон: +998 71 200 00 00",
+    "address": "г. Ташкент, проспект Амира Темура, 1"
+  }
+}

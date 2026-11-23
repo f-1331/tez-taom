@@ -1,0 +1,102 @@
+{
+  "common": {
+    "appName": "Тез-Таом",
+    "tagline": "Тез, иссиқ, мазали",
+    "loading": "Юкланмоқда...",
+    "error": "Хатолик юз берди",
+    "empty": "Маълумот топилмади",
+    "retry": "Қайта уриниш",
+    "cancel": "Бекор қилиш",
+    "save": "Сақлаш",
+    "close": "Ёпиш",
+    "back": "Орқага",
+    "currency": "сўм"
+  },
+  "header": {
+    "menu": "Меню",
+    "orders": "Буюртмаларим",
+    "about": "Биз ҳақимизда",
+    "language": "Тил",
+    "cart": "Сават"
+  },
+  "hero": {
+    "title": "Оч қолдингми? 25 дақиқада эшигингда.",
+    "subtitle": "Тошкент бўйлаб қайноқ бургерлар, мазали лавашлар ва хуштаъм газаклар.",
+    "cta": "Ҳозир буюртма бериш"
+  },
+  "menu": {
+    "allCategories": "Барча таомлар",
+    "addToCart": "Қўшиш",
+    "added": "Қўшилди",
+    "outOfStock": "Мавжуд эмас",
+    "allergens": "Аллергенлар",
+    "modifiersTitle": "Таомни созлаш",
+    "customize": "Мослаштириш",
+    "required": "Мажбурий",
+    "optional": "Ихтиёрий",
+    "chooseOptions": "Вариантларни танланг",
+    "popular": "Машҳур",
+    "new": "Янги"
+  },
+  "cart": {
+    "title": "Буюртма чеки",
+    "emptyTitle": "Саватчангиз бўш",
+    "emptySubtitle": "Менюдан ўзингиз ёқтирган таомларни танланг",
+    "subtotal": "Таомлар суммаси",
+    "deliveryFee": "Етказиб бериш",
+    "freeDeliveryNotice": "100 000 сўмдан ортиқ буюртмаларга бепул етказиш!",
+    "discount": "Чегирма",
+    "total": "Жами тўлов",
+    "checkoutBtn": "Буюртмани расмийлаштириш",
+    "clearCart": "Тозалаш",
+    "itemsCount": "{count, plural, one {# та таом} other {# та таом}}"
+  },
+  "checkout": {
+    "title": "Расмийлаштириш",
+    "deliveryType": "Етказиш усули",
+    "delivery": "Етказиб бериш",
+    "pickup": "Олиб кетиш",
+    "name": "Исмингиз",
+    "phone": "Телефон рақамингиз",
+    "address": "Етказиш манзили",
+    "addressPlaceholder": "Кўча, уй, хонадон рақами",
+    "comment": "Буюртмага изоҳ",
+    "commentPlaceholder": "Масалан: домофон коди ёки етказиш учун эслатма",
+    "scheduledTime": "Етказиш вақти",
+    "asSoonAsPossible": "Иложи борича тезроқ (25-35 дақиқа)",
+    "selectTime": "Вақтни танлаш",
+    "paymentMethod": "Тўлов усули",
+    "cash": "Нақд пул",
+    "cardOnDelivery": "Карта орқали (курьерга)",
+    "online": "Онлайн тўлов",
+    "placeOrder": "Буюртма бериш",
+    "placing": "Буюртма қабул қилинмоқда...",
+    "orderSuccess": "Буюртмангиз қабул қилинди!",
+    "backToMenu": "Менюга қайтиш",
+    "minOrderNotice": "Минимал буюртма суммаси мавжуд эмас",
+    "promoPlaceholder": "Промо-код",
+    "applyPromo": "Қўллаш"
+  },
+  "orderStatus": {
+    "title": "Буюртма ҳолати",
+    "orderNumber": "Буюртма #{number}",
+    "statusNew": "Янги буюртма қабул қилинди",
+    "statusConfirmed": "Буюртма тасдиқланди",
+    "statusPreparing": "Ошхонада тайёрланмоқда",
+    "statusReady": "Буюртма тайёр",
+    "statusOnTheWay": "Курьер йўлда",
+    "statusDelivered": "Етказиб берилди",
+    "statusPickedUp": "Мижоз олиб кетди",
+    "statusCanceled": "Буюртма бекор қилинди",
+    "etaText": "Тахминий вақт: {minutes} дақиқа",
+    "courierInfo": "Курьер: {name} ({phone})",
+    "timelineTitle": "Буюртма жараёни",
+    "liveUpdates": "Реал-вақт режимида янгиланмоқда"
+  },
+  "footer": {
+    "rights": "Барча ҳуқуқлар ҳимояланган.",
+    "workingHours": "Ҳар куни 09:00 дан 23:00 гача",
+    "phone": "Боғланиш: +998 71 200 00 00",
+    "address": "Тошкент шаҳри, Амир Темур шоҳ кўчаси, 1-уй"
+  }
+}
